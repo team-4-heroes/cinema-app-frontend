@@ -1,0 +1,6 @@
+/* Global CSS file */
+
+#user-details {
+    display: none;
+    border-bottom-right-radius: 10px;
+}
