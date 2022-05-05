@@ -7,7 +7,7 @@ import {
 import { setupLoginHandlers, logout, updateLoginDependentComponents } from "./pages/login-logout/login-logout.js"
 
 window.addEventListener("load", async () => {
-  const router = new Navigo("/", { hash: true });
+  const router = new Navigo("/", { hash: true })
   const templateLogin = await loadTemplate("./pages/login-logout/login.html")
   const templateLogout = await loadTemplate("./pages/login-logout/logout.html")
   const templateHome = await loadTemplate("./pages/home/home.html")
@@ -23,7 +23,7 @@ window.addEventListener("load", async () => {
     .on("/", ()=>renderTemplate(templateHome, "content"))
     .on("/login", () => {
       renderTemplate(templateLogin, "content")
-      setupLoginHandlers()
+      setupLoginHandlers(router.navigate)
     })
     .on("/logout", () => {
       renderTemplate(templateLogout, "content")
@@ -31,7 +31,7 @@ window.addEventListener("load", async () => {
     })
     .notFound(() => renderText("No page for this route found", "content"))
     .resolve()
-});
+})
 
 updateLoginDependentComponents()
 window.onerror = (e) => alert(e)

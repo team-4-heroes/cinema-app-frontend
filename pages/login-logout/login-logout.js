@@ -1,25 +1,37 @@
-import { makeOptions } from "../../utils.js"
-import { SERVER_URL } from "../../settings.js"
+import { makeOptions, handleErrors, loginRequest } from "../../fetch-facade.js"
 
-export function setupLoginHandlers() {
+let _navigate //Only accessible from inside this module
+
+export function setupLoginHandlers(navigate) {
+  _navigate = navigate // We need a handle to navigate to redirect after successful login
   document.getElementById("btn-login").onclick = login
 }
 
-function login() {
-  // Athenticate user with credential from login form
-  let user = {username: document.getElementById("username").value, password: document.getElementById("password").value}
-  fetch(`${SERVER_URL}auth/login`, makeOptions("POST", user)).then(resp=>resp.json())
-  .then(resp=>{
-    setLoginState(resp.token, resp.roles, resp.username)
-    // TODO: navigate to index
-  })
+async function login() {
+  // Athenticate user with credentials from login form
+  const user = {
+    username: document.getElementById("username").value,
+    password: document.getElementById("password").value
+  }
+  try {
+    const resp = await loginRequest(user)
+    setLoginState(resp.token, resp.roles[0], resp.username)
+    _navigate("/") // navigate to home page after succesful login
+  } catch (err) {
+    displayErrMsg(document.getElementById("error"), err)
+  }
+}
+
+const displayErrMsg = (element,err)=>{
+  element.innerText = err.message + " - Try again"
+  element.style.display = "block"
 }
 
 export function logout() {
   setLoginState(null)
 }
 
-export function setLoginState(token, loggedInAs, username) {
+export async function setLoginState(token, loggedInAs, username) {
   if (token) {
     sessionStorage.setItem("token", token)
     if (loggedInAs) sessionStorage.setItem("logged-in-as", loggedInAs)
