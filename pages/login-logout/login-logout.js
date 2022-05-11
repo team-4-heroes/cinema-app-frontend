@@ -55,6 +55,8 @@ export function updateLoginDependentComponents() {
   }
   document.getElementById("login").style.display = loggedIn ? "none" : "block"
   document.getElementById("logout").style.display = loggedIn ? "block" : "none"
+  document.getElementById("sign-up").style.display = loggedIn ? "none" : "block"
   document.getElementById("user-details").style.display = loggedIn ? "inline" : "none"
   document.getElementById("movie-search").style.display = loggedIn ? "flex" : "none"
+
 }
