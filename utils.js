@@ -109,20 +109,3 @@ export function encode(str) {
   str = str.replace(/'/g, "&#039;");
   return str;
 }
-
-export function makeOptions(method, body) {
-  const opts = {
-    method: method,
-    headers: {
-      "Content-type": "application/json",
-      "Accept": "application/json"
-    }
-  }
-
-  if (body) opts.body = JSON.stringify(body)
-  // Authentication
-  let jwt = sessionStorage.getItem("token")
-  console.log(jwt)
-  if (jwt) opts.headers.Authorization = `Bearer ${jwt}`
-  return opts
-}
