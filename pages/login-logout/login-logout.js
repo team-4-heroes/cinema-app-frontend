@@ -1,4 +1,5 @@
 import { makeOptions, handleErrors, loginRequest } from "../../fetch-facade.js"
+import { displayMsg } from "../../utils.js"
 
 let _navigate //Only accessible from inside this module
 
@@ -18,14 +19,11 @@ async function login() {
     setLoginState(resp.token, resp.roles[0], resp.username)
     _navigate("/") // navigate to home page after succesful login
   } catch (err) {
-    displayErrMsg(document.getElementById("error"), err)
+    displayMsg(document.getElementById("login-error"), err.message)
   }
 }
 
-const displayErrMsg = (element,err)=>{
-  element.innerText = err.message + " - Try again"
-  element.style.display = "block"
-}
+
 
 export function logout() {
   setLoginState(null)

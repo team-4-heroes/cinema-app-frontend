@@ -109,3 +109,14 @@ export function encode(str) {
   str = str.replace(/'/g, "&#039;");
   return str;
 }
+
+export const appendLeadingZero = n=>{
+  if(n <= 9) return "0" + n;
+  return n
+}
+// see https://getbootstrap.com/docs/5.1/components/alerts/ for msgType options
+export const displayMsg = (container, msg, msgType)=>{
+  if (!msgType) msgType = "primary" // default msgType
+  const markup = `<div class="alert alert-${msgType}">${msg}</div>`
+  container.innerHTML = markup
+}
