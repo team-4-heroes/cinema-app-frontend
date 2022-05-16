@@ -12,6 +12,15 @@ export const deleteScreeningById = async (id) => await fetch(`${SERVER_URL}scree
 export const getAllMovies = async () => await fetch(`${SERVER_URL}movies`, makeOptions("get")).then(res => handleErrors(res))
 export const getMoviesFromOMDB = async () => await fetch(`http://www.omdbapi.com/?apikey=c058a009&type=movie&plot=short&s=universe`, {method: "get"}).then(res => handleErrors(res))
 export const getAllRooms = async () => await fetch(`${SERVER_URL}rooms`, makeOptions("get")).then(res => handleErrors(res))
+// TODO: He, refactor getMoviesRequest to getAllMovies above
+export const getMoviesRequest = async (movie) => await fetch(`${SERVER_URL}movies`, makeOptions("get", movie)).then(res => handleErrors(res))
+//export const getMovieRequest = async (movie) => await fetch(`${SERVER_URL}movies/{id}`, makeOptions("get", movie)).then(res => handleErrors(res))
+//export const getMoviesByKeywordRequest = async (movie) => await fetch(`${SERVER_URL}movies/keyword`, makeOptions("get", movie)).then(res => handleErrors(res))
+//export const getMoviesByActorRequest = async (movie) => await fetch(`${SERVER_URL}movies/search-actor`, makeOptions("get", movie)).then(res => handleErrors(res))
+//export const addMovieRequest = async (movie) => await fetch(`${SERVER_URL}movies`, makeOptions("put", movie)).then(res => handleErrors(res))
+//export const editMovieRequest = async (movie) => await fetch(`${SERVER_URL}movies/{id}`, makeOptions("patch", movie)).then(res => handleErrors(res))
+//export const deleteMovieRequest = async (movie) => await fetch(`${SERVER_URL}movies/{id}`, makeOptions("delete", movie)).then(res => handleErrors(res))
+//export const addActorToMovieRequest = async (movie) => await fetch(`${SERVER_URL}movies/add-actor`, makeOptions("post", movie)).then(res => handleErrors(res))
 
 // Do you fetches here, like above
 
