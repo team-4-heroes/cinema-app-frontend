@@ -8,7 +8,7 @@ import { setupLoginHandlers, logout, updateLoginDependentComponents } from "./pa
 import { signupHandlers } from "./pages/sign-up/sign-up.js"
 import { renderScreenings } from "./pages/screening/show-screenings.js"
 import { createNewScreening, renderOptions } from "./pages/screening/add-screening.js"
-import { populateMovies } from "./pages/movie/show-movie.js"
+import {populateMovies, renderFullSingleMovieInfo} from "./pages/movie/show-movies.js"
 
 window.addEventListener("load", async () => {
   const router = new Navigo("/", { hash: true })
@@ -18,10 +18,9 @@ window.addEventListener("load", async () => {
   const templateSignUp = await loadTemplate("./pages/sign-up/sign-up.html")
   const templateShowScreenings = await loadTemplate("./pages/screening/show-screenings.html")
   const templateAddScreening = await loadTemplate("./pages/screening/add-screening.html")
+  const templateShowMovie = await loadTemplate("./pages/movie/show-movies.html")
+  const templateShowMovieDetails = await loadTemplate("./pages/movie/show-single-movie.html")
 
-
-  const templateShowMovie = await loadTemplate("./pages/movie/show-movie.html")
-  //const templateManageMovie = await loadTemplate("./pages/movie/manage-movie.html")
   adjustForMissingHash()
   await router
     .hooks({
@@ -52,9 +51,13 @@ window.addEventListener("load", async () => {
         renderTemplate(templateSignUp,"content")
         signupHandlers()
       })
-      .on("/show-movie", () => {
+      .on("/show-movies", () => {
         renderTemplate(templateShowMovie, "content")
         populateMovies()
+      })
+      .on("/show-single-movie", () => {
+        renderTemplate(templateShowMovieDetails, "content")
+        renderFullSingleMovieInfo()
       })
     .notFound(() => renderText("No page for this route found", "content"))
     .resolve()
