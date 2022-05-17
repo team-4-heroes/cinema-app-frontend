@@ -32,11 +32,12 @@ export function renderFullSingleMovieInfo() {
 }
 
 function createMovieDetailColumn(movie) {
-    var idStrings = Array.from(document.getElementById("movie-details-tbl").querySelectorAll(`id`));
     for (const [key, value] of Object.entries(movie)) {
-        console.log(`${key} ${value}`);
-        if (idStrings.contains(`${key}`)) {
-            document.getElementById(`get-${key}-tbl-data`).innerHTML = movie[key];
+        var tdNode = document.getElementById(`get-${key}-tbl-data`)
+        if (tdNode) {
+            tdNode.innerHTML = value;
+        } else {
+            console.log("couldn't find node for the key" + key)
         }
     }
 }
