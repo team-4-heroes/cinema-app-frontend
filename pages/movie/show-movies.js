@@ -13,31 +13,34 @@ function renderRows(movies) {
     document.getElementById("get-all-movies-tbl").innerHTML = rows;
 }
 
-function createMovieTableRows(movies) {
+function createMovieTableRows(movies) {//TODO: Add link here to movie-detail-page using movie id
     const rows = movies.map(movie =>
         `<tr>
-            <td> ${movie.title} </td>
+            <td> ${movie.title} </td> 
             <td> ${movie.lengthInMinutes} </td>
             <td> ${movie.releaseYear} </td>
-            <td> ${movie.ageLimit} </td> //TODO: Why is this not showing?
+            <td> ${movie.description} </td>
         </tr>   
     `).join("\n")
     return rows;
 }
 
 export function renderFullSingleMovieInfo() {
-    const movie = getSingleMovie()
-    const movieTable =
-        `<tr>
-            <td> ${movie.id} </td>
-            <td> ${movie.title} </td>
-            <td> ${movie.lengthInMinutes} </td>
-            <td> ${movie.releaseYear} </td>
-            <td> ${movie.price} </td>
-            <td> ${movie.ageLimit} </td>
-            <td> ${movie.description} </td>
-            // genre, actor, screening
-        </tr>   
-        `
-    document.getElementById("get-single-movie-tbl").innerHTML = movieTable;
+    const id = 1;
+    getSingleMovie(id)
+        .then(movie => createMovieDetailColumn(movie))
+}
+
+function createMovieDetailColumn(movie) {
+    for (const [key, value] of Object.entries(movie)) {
+        console.log("PRINT RESULT OF Object.entries(movie):"`${key} ${value}`);
+        // check that property has corresponding table cell, if not, then ignore
+
+
+        var prop = 'title';
+
+
+        // make this into a separate method
+        document.getElementById(`get-${prop}-tbl-data`).innerHTML = movie[prop];
+    }
 }

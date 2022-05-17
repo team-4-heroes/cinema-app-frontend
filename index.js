@@ -57,7 +57,7 @@ window.addEventListener("load", async () => {
       })
       .on("/show-single-movie", () => {
         renderTemplate(templateShowMovieDetails, "content")
-        renderFullSingleMovieInfo()
+        //renderFullSingleMovieInfo()
       })
     .notFound(() => renderText("No page for this route found", "content"))
     .resolve()

@@ -8,7 +8,7 @@ export const addScreening = async (screening) => await fetch(`${SERVER_URL}scree
 export const updateScreening = async (id, screening) => await fetch(`${SERVER_URL}screenings/${id}`, makeOptions("put", screening, true)).then(res => handleErrors(res))
 export const deleteScreeningById = async (id) => await fetch(`${SERVER_URL}screenings/${id}`, makeOptions("delete", null, true)).then(res => handleErrors(res))
 export const getAllMovies = async () => await fetch(`${SERVER_URL}movies`, makeOptions("get")).then(res => handleErrors(res))
-export const getSingleMovie = async () => await fetch(`${SERVER_URL}movies/${id}`, makeOptions("get")).then(res => handleErrors(res))
+export const getSingleMovie = async (id) => await fetch(`${SERVER_URL}movies/${id}`, makeOptions("get")).then(res => handleErrors(res))
 export const getMoviesFromOMDB = async () => await fetch(`http://www.omdbapi.com/?apikey=c058a009&type=movie&plot=short&s=universe`, {method: "get"}).then(res => handleErrors(res))
 export const getAllRooms = async () => await fetch(`${SERVER_URL}rooms`, makeOptions("get")).then(res => handleErrors(res))
 // Do you fetches here, like above
