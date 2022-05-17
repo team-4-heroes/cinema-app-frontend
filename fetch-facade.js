@@ -1,4 +1,4 @@
-import { SERVER_URL } from "../../settings.js"
+import { SERVER_URL } from "./settings.js"
 
 export const loginRequest = async (user) => await fetch(`${SERVER_URL}auth/login`, makeOptions("post", user)).then(res => handleErrors(res))
 export const signUpRequest = async (person) => await fetch(`${SERVER_URL}persons`, makeOptions("post", person)).then(res => handleErrors(res))

@@ -6,6 +6,7 @@ import {
 
 import { setupLoginHandlers, logout, updateLoginDependentComponents } from "./pages/login-logout/login-logout.js"
 import { signupHandlers } from "./pages/sign-up/sign-up.js"
+import {displayPerson} from "./pages/mange-profile/mange-profile.js";
 
 window.addEventListener("load", async () => {
   const router = new Navigo("/", { hash: true })
@@ -13,6 +14,7 @@ window.addEventListener("load", async () => {
   const templateLogout = await loadTemplate("./pages/login-logout/logout.html")
   const templateHome = await loadTemplate("./pages/home/home.html")
   const templateSignUp = await loadTemplate("./pages/sign-up/sign-up.html")
+  const templateMangeProfile = await loadTemplate("./pages/mange-profile/mange-profile.html")
   adjustForMissingHash()
   await router
     .hooks({
@@ -33,6 +35,10 @@ window.addEventListener("load", async () => {
       .on("/sign-up",() =>{
         renderTemplate(templateSignUp,"content")
         signupHandlers()
+      })
+      .on("/mange-profile",() => {
+        renderTemplate(templateMangeProfile, "content")
+        displayPerson()
       })
     .notFound(() => renderText("No page for this route found", "content"))
     .resolve()
