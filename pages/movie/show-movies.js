@@ -32,15 +32,11 @@ export function renderFullSingleMovieInfo() {
 }
 
 function createMovieDetailColumn(movie) {
+    var idStrings = Array.from(document.getElementById("movie-details-tbl").querySelectorAll(`id`));
     for (const [key, value] of Object.entries(movie)) {
-        console.log("PRINT RESULT OF Object.entries(movie):"`${key} ${value}`);
-        // check that property has corresponding table cell, if not, then ignore
-
-
-        var prop = 'title';
-
-
-        // make this into a separate method
-        document.getElementById(`get-${prop}-tbl-data`).innerHTML = movie[prop];
+        console.log(`${key} ${value}`);
+        if (idStrings.contains(`${key}`)) {
+            document.getElementById(`get-${key}-tbl-data`).innerHTML = movie[key];
+        }
     }
 }
