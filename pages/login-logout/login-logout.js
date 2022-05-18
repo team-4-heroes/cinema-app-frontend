@@ -1,4 +1,4 @@
-import { makeOptions, handleErrors, loginRequest } from "../../fetch-facade.js"
+import { makeOptions, handleErrors, loginRequest, getLoggedOnPerson } from "../../fetch-facade.js"
 import { displayMsg } from "../../utils.js"
 
 let _navigate //Only accessible from inside this module
@@ -17,6 +17,7 @@ async function login() {
   try {
     const resp = await loginRequest(user)
     setLoginState(resp.token, resp.roles[0], resp.username)
+    console.log(await getLoggedOnPerson())
     _navigate("/") // navigate to home page after succesful login
   } catch (err) {
     displayMsg(document.getElementById("login-error"), err.message)
@@ -56,5 +57,7 @@ export function updateLoginDependentComponents() {
   document.getElementById("sign-up").style.display = loggedIn ? "none" : "block"
   document.getElementById("user-details").style.display = loggedIn ? "inline" : "none"
   document.getElementById("movie-search").style.display = loggedIn ? "flex" : "none"
+  document.getElementById("mange-profile").style.display = loggedIn ? "flex" : "none"
+
 
 }

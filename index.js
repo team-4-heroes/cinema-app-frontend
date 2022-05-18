@@ -8,7 +8,11 @@ import { setupLoginHandlers, logout, updateLoginDependentComponents } from "./pa
 import { signupHandlers } from "./pages/sign-up/sign-up.js"
 import { renderScreenings } from "./pages/screening/show-screenings.js"
 import { createNewScreening, renderOptions } from "./pages/screening/add-screening.js"
+
 import {populateMovies, renderFullSingleMovieInfo} from "./pages/movie/show-movies.js"
+
+import {displayUserProfile} from "./pages/mange-profile/mange-profile.js";
+
 
 window.addEventListener("load", async () => {
   const router = new Navigo("/", { hash: true })
@@ -20,6 +24,7 @@ window.addEventListener("load", async () => {
   const templateAddScreening = await loadTemplate("./pages/screening/add-screening.html")
   const templateShowMovie = await loadTemplate("./pages/movie/show-movies.html")
   const templateShowMovieDetails = await loadTemplate("./pages/movie/show-single-movie.html")
+  const templateMangeProfile = await loadTemplate("./pages/mange-profile/mange-profile.html")
 
   adjustForMissingHash()
   await router
@@ -58,12 +63,13 @@ window.addEventListener("load", async () => {
       .on("/show-single-movie", () => {
         renderTemplate(templateShowMovieDetails, "content")
         renderFullSingleMovieInfo()
+      .on("/mange-profile", () => {
+        renderTemplate(templateMangeProfile, "content")
+        displayUserProfile()
       })
     .notFound(() => renderText("No page for this route found", "content"))
     .resolve()
 })
-
-
 
 updateLoginDependentComponents()
 window.onerror = (e) => alert(e)
