@@ -25,50 +25,51 @@ window.addEventListener("load", async () => {
   const templateShowMovie = await loadTemplate("./pages/movie/show-movies.html")
   const templateShowMovieDetails = await loadTemplate("./pages/movie/show-single-movie.html")
   const templateMangeProfile = await loadTemplate("./pages/mange-profile/mange-profile.html")
-
+  
   adjustForMissingHash()
   await router
-    .hooks({
-      before(done, match) {
-        setActiveLink("top-nav", match.url)
-        done()
-      }
-    })
-    .on("/", ()=>renderTemplate(templateHome, "content"))
-    .on("/show-screenings", ()=>{
-      renderTemplate(templateShowScreenings, "content")
-      renderScreenings()
-    })
-    .on("/add-screening", ()=>{
-      renderTemplate(templateAddScreening, "content")
-      renderOptions()
-      document.getElementById("btn-add-screening").onclick = createNewScreening
-    })
-    .on("/login", () => {
-      renderTemplate(templateLogin, "content")
-      setupLoginHandlers(router.navigate)
-    })
-    .on("/logout", () => {
-      renderTemplate(templateLogout, "content")
-      logout()
-    })
-      .on("/sign-up",() =>{
-        renderTemplate(templateSignUp,"content")
-        signupHandlers()
-      })
-      .on("/show-movies", () => {
-        renderTemplate(templateShowMovie, "content")
-        populateMovies()
-      })
-      .on("/show-single-movie", () => {
-        renderTemplate(templateShowMovieDetails, "content")
-        renderFullSingleMovieInfo()
-      .on("/mange-profile", () => {
-        renderTemplate(templateMangeProfile, "content")
-        displayUserProfile()
-      })
-    .notFound(() => renderText("No page for this route found", "content"))
-    .resolve()
+  .hooks({
+    before(done, match) {
+      setActiveLink("top-nav", match.url)
+      done()
+    }
+  })
+  .on("/", ()=>renderTemplate(templateHome, "content"))
+  .on("/show-screenings", ()=>{
+    renderTemplate(templateShowScreenings, "content")
+    renderScreenings()
+  })
+  .on("/add-screening", ()=>{
+    renderTemplate(templateAddScreening, "content")
+    renderOptions()
+    document.getElementById("btn-add-screening").onclick = createNewScreening
+  })
+  .on("/login", () => {
+    renderTemplate(templateLogin, "content")
+    setupLoginHandlers(router.navigate)
+  })
+  .on("/logout", () => {
+    renderTemplate(templateLogout, "content")
+    logout()
+  })
+  .on("/sign-up",() =>{
+    renderTemplate(templateSignUp,"content")
+    signupHandlers()
+  })
+  .on("/show-movies", () => {
+    renderTemplate(templateShowMovie, "content")
+    populateMovies()
+  })
+  .on("/show-single-movie", () => {
+    renderTemplate(templateShowMovieDetails, "content")
+    renderFullSingleMovieInfo()
+  .on("/mange-profile", () => {
+      renderTemplate(templateMangeProfile, "content")
+      displayUserProfile()
+  })
+  .notFound(() => renderText("No page for this route found", "content"))
+  .resolve()
+  })
 })
 
 updateLoginDependentComponents()
