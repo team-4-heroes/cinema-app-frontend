@@ -1,10 +1,10 @@
 import {makeOptions} from "../../fetch-facade.js";
 import {SERVER_URL} from "../../settings.js";
+import {getLoggedOnPerson} from "../../fetch-facade.js";
 
 export function displayUserProfile() {
     let currentUser = sessionStorage.getItem("username")
-    fetch(`${SERVER_URL}persons/${currentUser}`,makeOptions("GET"))
-        .then(res=>res.json())
+    getLoggedOnPerson()
         .then(jsonParsed=> {
             console.log(jsonParsed)
             renderUserDetails(jsonParsed)
