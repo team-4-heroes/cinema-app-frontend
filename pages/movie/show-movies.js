@@ -53,5 +53,5 @@ function createActorsTd(actors) {
 }
 
 function createImgTd(movie) {
-    return `<img src="${movie.posterUrl}" alt="Poster for ${movie.title}">`;
+    return `<img src="${movie.posterUrl}" class="img-fluid" alt="Poster for ${movie.title}">`;
 }
