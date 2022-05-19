@@ -8,7 +8,6 @@ export function populateMovies() {
 }
 
 function renderRows(movies) {
-    console.log(movies)
     const rows = createMovieTableRows(movies);
     document.getElementById("get-all-movies-tbl").innerHTML = rows;
 }
@@ -27,7 +26,6 @@ function createMovieTableRows(movies) {
 
 // Functions for Movie Details
 export function renderFullSingleMovieInfo(movieId) {
-    console.debug(`rendering details for movie ${movieId}`)
     getSingleMovie(movieId)
         .then(movie => createMovieDetailColumn(movie))
 }
@@ -39,8 +37,6 @@ function createMovieDetailColumn(movie) {
             if(key===`actors`) {
                 tdNode.innerHTML = createActorsTd(value);
             } else if(key===`posterUrl`) {
-
-                console.log(movie.posterUrl);
                 tdNode.innerHTML = createImgTd(movie);
             } else {
                 tdNode.innerHTML = value
