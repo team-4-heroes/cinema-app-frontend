@@ -40,7 +40,9 @@ function createMovieDetailColumn(movie) {
             if(key===`actors`) {
                 tdNode.innerHTML = createActorsTd(value);
             } else if(key===`posterUrl`) {
-                tdNode.innerHTML = `<img src="${movie.posterUrl}" alt="Poster for ${movie.title}">`
+
+                console.log(movie.posterUrl);
+                tdNode.innerHTML = createImgTd(movie);
             } else {
                 tdNode.innerHTML = value
             }
@@ -53,4 +55,8 @@ function createMovieDetailColumn(movie) {
 function createActorsTd(actors) {
     const tdActors = actors.map(a => `${a.firstName} ${a.lastName}`).join(", ")
     return tdActors;
+}
+
+function createImgTd(movie) {
+    return `<img src="${movie.posterUrl}" alt="Poster for ${movie.title}">`;
 }
