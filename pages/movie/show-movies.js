@@ -13,10 +13,10 @@ function renderRows(movies) {
     document.getElementById("get-all-movies-tbl").innerHTML = rows;
 }
 
-function createMovieTableRows(movies) {//TODO: Add link here to movie-detail-page using movie id
-    const rows = movies.map(movie =>
+function createMovieTableRows(movies) {
+    const rows = movies.sort((a,b) => a.title.localeCompare(b.title)).map(movie =>
         `<tr>
-            <td><a href="/show-single-movie.html"> ${movie.title} </a></td>
+            <td><a className="nav-link active" href="#/show-single-movie/${movie.id}" data-navigo=""> ${movie.title} </a></td>
             <td> ${movie.lengthInMinutes} </td>
             <td> ${movie.releaseYear} </td>
             <td> ${movie.description} </td>
@@ -25,13 +25,12 @@ function createMovieTableRows(movies) {//TODO: Add link here to movie-detail-pag
     return rows;
 }
 
-export function renderFullSingleMovieInfo() {
-    const id = 1;
-    getSingleMovie(id)
+// Functions for Movie Details
+export function renderFullSingleMovieInfo(movieId) {
+    console.debug(`rendering details for movie ${movieId}`)
+    getSingleMovie(movieId)
         .then(movie => createMovieDetailColumn(movie))
 }
-
-// Functions for Movie Details
 
 function createMovieDetailColumn(movie) {
     for (const [key, value] of Object.entries(movie)) {

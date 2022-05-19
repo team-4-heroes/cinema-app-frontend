@@ -22,10 +22,11 @@ window.addEventListener("load", async () => {
   const templateSignUp = await loadTemplate("./pages/sign-up/sign-up.html")
   const templateShowScreenings = await loadTemplate("./pages/screening/show-screenings.html")
   const templateAddScreening = await loadTemplate("./pages/screening/add-screening.html")
+  const templateAddMovie = await loadTemplate("./pages/movie/add-movie.html")
   const templateShowMovie = await loadTemplate("./pages/movie/show-movies.html")
   const templateShowMovieDetails = await loadTemplate("./pages/movie/show-single-movie.html")
   const templateMangeProfile = await loadTemplate("./pages/mange-profile/mange-profile.html")
-  
+
   adjustForMissingHash()
   await router
   .hooks({
@@ -56,14 +57,18 @@ window.addEventListener("load", async () => {
     renderTemplate(templateSignUp,"content")
     signupHandlers()
   })
+  .on("/add-movie", () => {
+    renderTemplate(templateAddMovie, "content")
+    // add movie: fetch from OMDB and display search result. Ez
+   })
   .on("/show-movies", () => {
     renderTemplate(templateShowMovie, "content")
     populateMovies()
   })
-  .on("/show-single-movie", () => {
-    renderTemplate(templateShowMovieDetails, "content")
-    renderFullSingleMovieInfo()
-  })
+    .on("/show-single-movie/:movieId", (navigoMatch) => {
+      renderTemplate(templateShowMovieDetails, "content")
+      renderFullSingleMovieInfo(navigoMatch.data.movieId)
+    })
   .on("/mange-profile", () => {
       renderTemplate(templateMangeProfile, "content")
       displayUserProfile()
