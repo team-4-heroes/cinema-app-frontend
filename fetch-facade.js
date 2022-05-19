@@ -2,8 +2,8 @@ import { SERVER_URL } from "../../settings.js"
 
 export const loginRequest = async (user) => await fetch(`${SERVER_URL}auth/login`, makeOptions("post", user)).then(res => handleErrors(res))
 export const signUpRequest = async (person) => await fetch(`${SERVER_URL}persons`, makeOptions("post", person)).then(res => handleErrors(res))
-
 export const getLoggedOnPerson = async () => await fetch(`${SERVER_URL}persons/this`, makeOptions("get", null, true)).then(res => handleErrors(res))
+
 export const getMoviesScreenings = async () => await fetch(`${SERVER_URL}movies/screenings`, makeOptions("get")).then(res => handleErrors(res))
 
 export const getAllScreenings = async () => await fetch(`${SERVER_URL}screenings`, makeOptions("get")).then(res => handleErrors(res))
@@ -15,7 +15,7 @@ export const getAllMovies = async () => await fetch(`${SERVER_URL}movies`, makeO
 export const getSingleMovie = async (id) => await fetch(`${SERVER_URL}movies/${id}`, makeOptions("get")).then(res => handleErrors(res))
 
 export const getAllRooms = async () => await fetch(`${SERVER_URL}rooms`, makeOptions("get")).then(res => handleErrors(res))
-// Do you fetches here, like above
+// Do your fetches here, like above
 
 export function makeOptions(method, body, addToken) {
     const opts = {
