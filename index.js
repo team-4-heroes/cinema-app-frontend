@@ -63,6 +63,7 @@ window.addEventListener("load", async () => {
   .on("/show-single-movie", () => {
     renderTemplate(templateShowMovieDetails, "content")
     renderFullSingleMovieInfo()
+  })
   .on("/mange-profile", () => {
       renderTemplate(templateMangeProfile, "content")
       displayUserProfile()
@@ -70,7 +71,6 @@ window.addEventListener("load", async () => {
   .notFound(() => renderText("No page for this route found", "content"))
   .resolve()
   })
-})
 
 updateLoginDependentComponents()
 window.onerror = (e) => alert(e)
