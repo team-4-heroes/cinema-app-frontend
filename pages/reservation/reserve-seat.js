@@ -11,32 +11,38 @@ import { getSeats } from "../../fetch-facade.js"
 
     //Button reserve = send request
         //Confirmation msg if request succesful (seats unoccupied)
-function showSeats() {
+
+const seatcheckbox = ""
+export function showSeats() {
     console.log("Called getSeats")
-    getSeats
+    getSeats()
     .then(res => res.json())
         .then(reservedSeat => 
             {console.log(reservedSeat)
 
             for (var i = 1; i < 10; i++) {
-                    const seatcheckbox = data.map(reservedSeat =>
+                    seatcheckbox = data.map(reservedSeat =>
                         {if (reservedSeat.reservation == null) {
-                            <input type = 'checkbox' id={reservedSeat.id}></input>
+                            "<input type = 'checkbox'>"
                         }
                         if (i / 10 == 0) {
                             "\n"
                         }
                         else {
-                            <td>
-                                <input type = 'checkbox' id={reservedSeat.id} disabled>
-                                </input>
-                            </td>
+                            "<td>"
+                                "<input type = 'checkbox' id={reservedSeat.id} disabled>"
+                            
+                            "</td>"
                         }    
-                    })
+                    }).join("\n")
                         
                 }
             }
-        ).join("\n")
+        )
+        .catch(err => {
+            console.log(err)
+          })
+          .finally(e => console.log("Done with showSeats"))
         document.getElementById("seat-table").innerHTML = seatcheckbox;
     }
 
