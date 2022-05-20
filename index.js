@@ -8,6 +8,9 @@ import { setupLoginHandlers, logout, updateLoginDependentComponents } from "./pa
 import { signupHandlers } from "./pages/sign-up/sign-up.js"
 import { renderScreenings } from "./pages/screening/show-screenings.js"
 import { createNewScreening, renderOptions } from "./pages/screening/add-screening.js"
+import { populateMovies } from "./pages/movie/show-movie.js"
+import { showSeats } from "./pages/reservation/reserve-seat.js"
+
 
 import {populateMovies, renderFullSingleMovieInfo} from "./pages/movie/show-movies.js"
 
@@ -26,6 +29,10 @@ window.addEventListener("load", async () => {
   const templateShowMovie = await loadTemplate("./pages/movie/show-movies.html")
   const templateShowMovieDetails = await loadTemplate("./pages/movie/show-single-movie.html")
   const templateMangeProfile = await loadTemplate("./pages/mange-profile/mange-profile.html")
+
+  const templateReserveSeat = await loadTemplate("./pages/reservation/reserve-seat.html")
+
+  const templateShowMovie = await loadTemplate("./pages/movie/show-movie.html")
 
   adjustForMissingHash()
   await router
