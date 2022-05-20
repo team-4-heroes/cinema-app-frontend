@@ -8,6 +8,9 @@ import { setupLoginHandlers, logout, updateLoginDependentComponents } from "./pa
 import { signupHandlers } from "./pages/sign-up/sign-up.js"
 import { renderScreenings } from "./pages/screening/show-screenings.js"
 import { createNewScreening, renderOptions } from "./pages/screening/add-screening.js"
+import { populateMovies } from "./pages/movie/show-movie.js"
+import { showSeats } from "./pages/reservation/reserve-seat.js"
+
 
 import {populateMovies, renderFullSingleMovieInfo} from "./pages/movie/show-movies.js"
 
@@ -22,6 +25,52 @@ window.addEventListener("load", async () => {
   const templateSignUp = await loadTemplate("./pages/sign-up/sign-up.html")
   const templateShowScreenings = await loadTemplate("./pages/screening/show-screenings.html")
   const templateAddScreening = await loadTemplate("./pages/screening/add-screening.html")
+  const templateReserveSeat = await loadTemplate("./pages/reservation/reserve-seat.html")
+
+
+  const templateShowMovie = await loadTemplate("./pages/movie/show-movie.html")
+  //const templateManageMovie = await loadTemplate("./pages/movie/manage-movie.html")
+  adjustForMissingHash()
+  await router
+    .hooks({
+      before(done, match) {
+        setActiveLink("top-nav", match.url)
+        done()
+      }
+    })
+    .on("/", ()=>renderTemplate(templateHome, "content"))
+    .on("/show-screenings", ()=>{
+      renderTemplate(templateShowScreenings, "content")
+      renderScreenings()
+    })
+    .on("/add-screening", ()=>{
+      renderTemplate(templateAddScreening, "content")
+      renderOptions()
+      document.getElementById("btn-add-screening").onclick = createNewScreening
+    })
+    .on("/login", () => {
+      renderTemplate(templateLogin, "content")
+      setupLoginHandlers(router.navigate)
+    })
+    .on("/logout", () => {
+      renderTemplate(templateLogout, "content")
+      logout()
+    })
+      .on("/sign-up",() =>{
+        renderTemplate(templateSignUp,"content")
+        signupHandlers()
+      })
+      .on("/show-movie", () => {
+        renderTemplate(templateShowMovie, "content")
+        populateMovies()
+      }).on("/reserve-seat", () => {
+        renderTemplate(templateReserveSeat, "content")
+        showSeats()
+      })
+    .notFound(() => renderText("No page for this route found", "content"))
+    .resolve()
+})
+
   const templateShowMovie = await loadTemplate("./pages/movie/show-movies.html")
   const templateShowMovieDetails = await loadTemplate("./pages/movie/show-single-movie.html")
   const templateMangeProfile = await loadTemplate("./pages/mange-profile/mange-profile.html")

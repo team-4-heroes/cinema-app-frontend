@@ -11,6 +11,7 @@ export const getScreeningById = async (id) => await fetch(`${SERVER_URL}screenin
 export const addScreening = async (screening) => await fetch(`${SERVER_URL}screenings`, makeOptions("post", screening, false)).then(res => handleErrors(res))
 export const updateScreening = async (id, screening) => await fetch(`${SERVER_URL}screenings/${id}`, makeOptions("put", screening, true)).then(res => handleErrors(res))
 export const deleteScreeningById = async (id) => await fetch(`${SERVER_URL}screenings/${id}`, makeOptions("delete", null, true)).then(res => handleErrors(res))
+export const getSeats = async (id) => await fetch(`${SERVER_URL}reservations/${id}`, makeOptions("get")).then(res => handleErrors(res))
 export const getAllMovies = async () => await fetch(`${SERVER_URL}movies`, makeOptions("get")).then(res => handleErrors(res))
 export const getSingleMovie = async (id) => await fetch(`${SERVER_URL}movies/${id}`, makeOptions("get")).then(res => handleErrors(res))
 
