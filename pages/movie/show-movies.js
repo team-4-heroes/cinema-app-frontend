@@ -8,15 +8,14 @@ export function populateMovies() {
 }
 
 function renderRows(movies) {
-    console.log(movies)
     const rows = createMovieTableRows(movies);
     document.getElementById("get-all-movies-tbl").innerHTML = rows;
 }
 
-function createMovieTableRows(movies) {//TODO: Add link here to movie-detail-page using movie id
-    const rows = movies.map(movie =>
+function createMovieTableRows(movies) {
+    const rows = movies.sort((a,b) => a.title.localeCompare(b.title)).map(movie =>
         `<tr>
-            <td><a href="/show-single-movie.html"> ${movie.title} </a></td>
+            <td><a className="nav-link active" href="#/show-single-movie/${movie.id}" data-navigo=""> ${movie.title} </a></td>
             <td> ${movie.lengthInMinutes} </td>
             <td> ${movie.releaseYear} </td>
             <td> ${movie.description} </td>
@@ -25,13 +24,11 @@ function createMovieTableRows(movies) {//TODO: Add link here to movie-detail-pag
     return rows;
 }
 
-export function renderFullSingleMovieInfo() {
-    const id = 1;
-    getSingleMovie(id)
+// Functions for Movie Details
+export function renderFullSingleMovieInfo(movieId) {
+    getSingleMovie(movieId)
         .then(movie => createMovieDetailColumn(movie))
 }
-
-// Functions for Movie Details
 
 function createMovieDetailColumn(movie) {
     for (const [key, value] of Object.entries(movie)) {
@@ -40,8 +37,6 @@ function createMovieDetailColumn(movie) {
             if(key===`actors`) {
                 tdNode.innerHTML = createActorsTd(value);
             } else if(key===`posterUrl`) {
-
-                console.log(movie.posterUrl);
                 tdNode.innerHTML = createImgTd(movie);
             } else {
                 tdNode.innerHTML = value
@@ -58,5 +53,5 @@ function createActorsTd(actors) {
 }
 
 function createImgTd(movie) {
-    return `<img src="${movie.posterUrl}" alt="Poster for ${movie.title}">`;
+    return `<img src="${movie.posterUrl}" class="img-fluid" alt="Poster for ${movie.title}">`;
 }
